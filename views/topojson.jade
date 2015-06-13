@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title TopoJSON Data
+    meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
+    script(src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js')
+    link(href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css', rel='stylesheet')
+    style.
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+  body
+    script(src='https://api.tiles.mapbox.com/mapbox.js/plugins/leaflet-omnivore/v0.2.0/leaflet-omnivore.min.js')
+    #map
+    script.
+      L.mapbox.accessToken = 'pk.eyJ1IjoidmlqYXltMTIzNCIsImEiOiJIcWNHRTA0In0.cZojootDfr4AARFs5JIteQ';
+      var map = L.mapbox.map('map', 'examples.map-i86nkdio').setView([40, -80], 5);
+      // Omnivore will AJAX-request this file behind the scenes and parse it:
+      // note that there are considerations:
+      // - The file must either be on the same domain as the page that requests it,
+      //   or both the server it is requested from and the user's browser must
+      //   support CORS.
+      // Internally this function uses the TopoJSON library to decode the given file
+      // into GeoJSON.
+      var usLayer = omnivore.topojson('/javascripts/output.json')
+      .addTo(map);

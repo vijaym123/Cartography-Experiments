@@ -1,0 +1,45 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title L.mapbox.simplestyle with L.geoJson
+    meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
+    script(src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js')
+    link(href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css', rel='stylesheet')
+    style.
+      body { margin:0; padding:0; }
+      #map { position:absolute; top:0; bottom:0; width:100%; }
+  body
+    #map
+    script.
+      L.mapbox.accessToken = 'pk.eyJ1IjoidmlqYXltMTIzNCIsImEiOiJIcWNHRTA0In0.cZojootDfr4AARFs5JIteQ';
+      var geojson = [
+      {
+      "type": "Feature",
+      "geometry" : { "coordinates" : [ [ [ 0.804526916785911,
+                    -2.127334765609122
+                  ],
+                  [ 2.316089190577669,
+                    -2.127334765609122
+                  ],
+                  [ 2.316089190577669,
+                    -4.184490522840511
+                  ],
+                  [ 0.804526916785911,
+                    -4.184490522840511
+                  ],
+                  [ 0.804526916785911,
+                    -2.127334765609122
+                  ]
+                ] ],
+            "type" : "Polygon"
+          },
+      "properties" : { "title" : "Hydrogen",
+            "NAME_SHORT" : "H",
+            "fill": "#ff0000"
+             }
+      }
+      ];
+      var map = L.mapbox.map('map', 'vijaym1234.jbeghkt9')
+      .setView([-11, 14], 5);
+      L.geoJson(geojson, { style: L.mapbox.simplestyle.style }).addTo(map);

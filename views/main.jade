@@ -1,0 +1,86 @@
+doctype html
+html
+  head(lang='en')
+    meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
+    title Atlasify
+    link(rel='stylesheet', href='/stylesheets/style.css')
+    link(href='/stylesheets/bootstrap.min.css', rel='stylesheet')
+    link(href='/stylesheets/typeaheadjs.css', rel='stylesheet')
+    script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js')
+
+    script(src='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.js')
+    link(href='https://api.tiles.mapbox.com/mapbox.js/v2.1.5/mapbox.css', rel='stylesheet')
+
+    script(src='/javascripts/handlebars.js')
+    script(src='/javascripts/typeahead.js')
+    script(src='/javascripts/atlasify.js')
+    if title == "World Map"
+      script(src='/javascripts/worldMap.js')    
+    script(src='/javascripts/bootstrap-waitingfor.js')    
+
+  body
+    .container
+      nav.navbar.navbar-default.navbar-static-top
+        .container-fluid
+          .navbar-header
+            button.navbar-toggle.collapsed(type='button', data-toggle='collapse', data-target='#navbar', aria-expanded='false', aria-controls='navbar')
+              span.sr-only Toggle navigation
+              span.icon-bar
+              span.icon-bar
+              span.icon-bar
+            a.navbar-brand(href='/' style="font-size:25px;color:black;font-family:verdana") { Atlasify }
+
+          #navbar.navbar-collapse
+            form.navbar-form.navbar-left(role='search' style="padding-left:20%")
+              .form-group
+                //input.form-control(type='text',style="width:500px;", placeholder='Search')
+                span#remote
+                  input.typeahead(type='text' class="searchBox" placeholder='' spellcheck="false" dir="auto" typeahead-on-select="alert('test')" style="padding-top:10px;width:200%;height:100%")
+            
+            ul.nav.navbar-nav.navbar-right                      
+              li.dropdown
+                a.dropdown-toggle( href='#', data-toggle='dropdown', role='button', aria-expanded='false' style="font-size:15px;color:black;font-family:verdana")
+                  span(id="selectedCartoType") 
+                    { #{title} } 
+                  span.caret(style="border-left: 8px solid transparent;border-right: 8px solid transparent;border-top: 8px solid #000000;")
+                ul.dropdown-menu(role='menu')
+                  li
+                    a(class="cartoType", href='/') World Map
+                  li
+                    a(class="cartoType", href='/periodic') Periodic Table
+                  li
+                    a(class="cartoType", href='/senate') US Senate Seating
+
+    #legend(style='display:none;')
+      strong Semantic Relatedness score
+        nav.legend.clearfix
+          span(style='background:#fee5d9;')
+          span(style='background:#fcae91;')
+          span(style='background:#fb6a4a;')
+          span(style='background:#de2d26;')
+          span(style='background:#a50f15;')
+          label 0 - 20%
+          label 40%
+          label 60%
+          label 80%
+          label 100%    
+    #map.map
+              
+    script(src='/javascripts/bootstrap.min.js')
+    script.
+      var mapType = {'World Map': 'vijaym1234.orfnu3di', 'Periodic Table':'vijaym1234.lbann75b', 'US Senate Seating': 'vijaym1234.jbeghkt9'};
+      var setViewValues = {'World Map': [35,0,2], 'Periodic Table': [-12,16,5], 'US Senate Seating': [-4, 7, 7]};
+      var minZoomValues = {'World Map': 2, 'Periodic Table': 5, 'US Senate Seating': 6};
+      L.mapbox.accessToken = 'put valid access token';
+      var type = $('#selectedCartoType').text();
+      var selectedMap = type.substring(4,type.length-3);
+      var map = new L.mapbox.map('map', mapType[selectedMap], { tileLayer: {
+        // This map option disables world wrapping. by default, it is false.
+        continuousWorld: false,
+        // This option disables loading tiles outside of the world bounds.
+        noWrap: true
+        },
+        minZoom: minZoomValues[selectedMap]
+       })
+      .setView([setViewValues[selectedMap][0], setViewValues[selectedMap][1]], setViewValues[selectedMap][2]);
+      map.legendControl.addLegend(document.getElementById('legend').innerHTML);

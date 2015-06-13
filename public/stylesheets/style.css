@@ -1,0 +1,64 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin:0;
+  padding:0;
+}
+
+nav.navbar {
+  background: transparent;
+  }
+
+a {
+  color: #00B7FF;
+}
+
+#map { position:absolute; top:0; bottom:0; width:100%; }
+
+.searchBox {
+    position: relative;
+    border: thin solid #c4c4c4;
+    height: 15px;
+    width: 275px;
+    font-size: 13px;
+    padding: 4px;
+    border-radius: 4px;
+    padding-right: 25px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+
+    -webkit-transition: border 0.5s;
+    -moz-transition: border 0.5s;
+    -ms-transition: border 0.5s;
+    -o-transition: border 0.5s;
+    transition: border 0.5s;
+
+    -webkit-transition: -webkit-box-shadow 0.5s;
+    -moz-transition: -moz-box-shadow 0.5s;
+    -ms-transition: -ms-box-shadow 0.5s;
+    -o-transition: -o-box-shadow 0.5s;
+    -webkit-transition: box-shadow 0.5s;
+    -moz-transition: box-shadow 0.5s;
+    -ms-transition: box-shadow 0.5s;
+    -o-transition: box-shadow 0.5s;
+    transition: box-shadow 0.5s;
+}
+
+.searchBox:focus {
+    outline: none;
+    border: thin solid #41ab5d;
+    box-shadow: 0px 0px 8px #41ab5d;
+    -moz-box-shadow: 0px 0px 8px #41ab5d;
+    -webkit-box-shadow: 0px 0px 8px #41ab5d;
+}
+
+.legend label,
+.legend span {
+  display:block;
+  float:left;
+  height:15px;
+  width:20%;
+  text-align:center;
+  font-size:9px;
+  color:#808080;
+  } 
